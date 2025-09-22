@@ -1,25 +1,39 @@
 [package]
-name = "rust-starter-kit"   # published crate name (with dash)
+name = "rust-starter-kit"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# HTTP server core
+hyper = { version = "1", features = ["full"] }
+
+# Tokio runtime adapters for hyper (TokioIo, timers, etc.)
+hyper-util = { version = "0.1", features = ["full"] }
+
+# Body helpers: Full<Bytes>, Empty, combinators
+http-body-util = "0.1"
+
+# Serialization (reserved; not used in hello)
+serde = { version = "1", features = ["derive"] }
+
+# Errors & logging
+thiserror = "1"
+anyhow = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Utilities
+regex = "1"
+parking_lot = "0.12"
 
 [dev-dependencies]
-# Parametrized tests / fixtures
 rstest = "0.22"
-
-# BDD-style (describe/it)
 speculate = "0.1"
-
-# Mocking
 mockall = "0.13"
-
-# Snapshot testing
 insta = "1.38"
-
-# Benchmarking
 criterion = "0.5"
-
-# Property-based testing
 proptest = "1.5"
+tokio = { version = "1", features = ["full"] } # async tests
