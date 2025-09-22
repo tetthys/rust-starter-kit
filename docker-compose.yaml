@@ -1,0 +1,19 @@
+services:
+  rust:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        RUST_VERSION: "1-slim"   # pin like "1.80.1-slim" for reproducibility
+    working_dir: /workspace
+    user: "1000:1000"
+    volumes:
+      # Mount current repo (where Dockerfile lives) as /workspace
+      - ./:/workspace
+      # Persist dependency caches without touching the toolchain
+      - cargo-registry:/usr/local/cargo/registry
+      - cargo-git:/usr/local/cargo/git
+
+volumes:
+  cargo-registry:
+  cargo-git:

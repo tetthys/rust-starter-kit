@@ -1,0 +1,7 @@
+# Prevent sending heavy stuff to the Docker daemon
+target
+.git
+.gitignore
+.vscode
+.idea
+.DS_Store
