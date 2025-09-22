@@ -20,5 +20,8 @@ WORKDIR /workspace
 # Use non-root by default
 USER rust
 
-# Prove cargo/rustc exist at build time
+# Install extra components (rustfmt + clippy) for the current default toolchain
+RUN rustup component add rustfmt clippy
+
+# Sanity check (prove cargo/rustc exist)
 RUN cargo --version && rustc --version
