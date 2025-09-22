@@ -4,3 +4,22 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+
+[dev-dependencies]
+# Parametrized tests / fixtures
+rstest = "0.22"
+
+# BDD-style (describe/it)
+speculate = "0.1"
+
+# Mocking
+mockall = "0.13"
+
+# Snapshot testing
+insta = "1.38"
+
+# Benchmarking
+criterion = "0.5"
+
+# Property-based testing
+proptest = "1.5"
