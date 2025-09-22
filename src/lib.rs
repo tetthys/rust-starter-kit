@@ -9,3 +9,5 @@ pub mod services;
 pub mod handlers;
 
 pub use app::App;
+
+pub mod views; // ← 추가

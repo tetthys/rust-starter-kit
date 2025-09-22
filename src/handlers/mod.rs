@@ -1,4 +1,5 @@
 pub mod hello_handler;
+pub mod hello_template_handler;
 
 use hyper::{Request, Response};
 
