@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
-set -euo pipefail
-# Run any cargo subcommand inside the container, mapped to the repo root.
+# Pass any cargo subcommand to the container.
 # Examples:
-#   ./run/cargo.sh init --bin
+#   ./run/cargo.sh --version
+#   ./run/cargo.sh new hello --bin
 #   ./run/cargo.sh build
-#   ./run/cargo.sh test
 #   ./run/cargo.sh run
-docker compose run --rm -T rust cargo "$@"
+set -euo pipefail
+source "$(dirname "$0")/_common.sh"
+require_compose_root
+in_container cargo "$@"
