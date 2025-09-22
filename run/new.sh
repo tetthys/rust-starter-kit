@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
-# Create a new crate in the current repo root (bin by default).
-# Examples:
-#   ./run/new.sh hello --bin
-#   ./run/new.sh mylib --lib
+# Create a new crate under current repo (pass-through to cargo new).
 set -euo pipefail
 source "$(dirname "$0")/_common.sh"
 require_compose_root
+summary_trap_enable
 
 if [[ $# -lt 1 ]]; then
-  echo "Usage: ./run/new.sh <crate-name> [--bin|--lib]" >&2
-  exit 1
+  log_warn "Usage: ./run/new.sh <crate-name> [--bin|--lib]"
+  exit 2
 fi
 
-in_container cargo new "$@"
+with_section "New Crate" \
+  with_spinner "cargo new $*" in_container cargo new "$@"

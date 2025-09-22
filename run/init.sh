@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
-# Initialize the current folder as a Cargo project (bin by default).
-# Use this when there is no Cargo.toml yet.
+# Initialize current directory as a Cargo project (defaults to --bin).
 set -euo pipefail
 source "$(dirname "$0")/_common.sh"
 require_compose_root
-in_container cargo init --bin
+summary_trap_enable
+
+ARGS=("$@")
+# If user didn't specify --bin/--lib, default to --bin
+if [[ " ${ARGS[*]-} " != *" --bin "* && " ${ARGS[*]-} " != *" --lib "* ]]; then
+  ARGS=(--bin "${ARGS[@]}")
+fi
+
+with_section "Init" \
+  with_spinner "cargo init ${ARGS[*]}" in_container cargo init "${ARGS[@]}"
